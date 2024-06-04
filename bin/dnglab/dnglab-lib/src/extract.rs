@@ -10,7 +10,7 @@ use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 use std::fs::File;
 use std::io::BufReader;
 use std::path::PathBuf;
-use std::time::Instant;
+// use std::time::Instant;
 
 use crate::filemap::{FileMap, MapMode};
 use crate::jobs::extractraw::{ExtractRawJob, JobResult};
@@ -21,7 +21,7 @@ const SUPPORTED_FILE_EXT: [&str; 1] = ["DNG"];
 
 /// Entry point for Clap sub command `extract`
 pub async fn extract(options: &ArgMatches) -> crate::Result<()> {
-  let now = Instant::now();
+  // let now = Instant::now();
 
   let proc = {
     let in_path: &PathBuf = options.get_one("INPUT").expect("INPUT not available");
@@ -84,7 +84,7 @@ pub async fn extract(options: &ArgMatches) -> crate::Result<()> {
       eprintln!("   {}", failed.job.input.display());
     }
   }
-  println!("Total time: {:.2}s", now.elapsed().as_secs_f32());
+  // println!("Total time: {:.2}s", now.elapsed().as_secs_f32());
   Ok(())
 }
 

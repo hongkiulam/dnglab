@@ -1,7 +1,7 @@
 use std::env;
 use std::fs::File;
 use std::path::PathBuf;
-use std::time::Instant;
+// use std::time::Instant;
 
 use rawler::decoders::RawDecodeParams;
 use rawler::RawFile;
@@ -42,7 +42,7 @@ fn main() {
 
   let rawloader = rawler::RawLoader::new();
 
-  let from_time = Instant::now();
+  // let from_time = Instant::now();
   {
     for _ in 0..ITERATIONS {
       let decoder = match rawloader.get_decoder(&mut rawfile) {
@@ -58,8 +58,8 @@ fn main() {
       }
     }
   }
-  let duration = from_time.elapsed();
+  // let duration = from_time.elapsed();
 
-  let avgtime = ((duration.as_nanos() as u64) / ITERATIONS / 1000) as f64 / 1000.0;
-  println!("Average decode time: {} ms ({} iterations)", avgtime, ITERATIONS);
+  // let avgtime = ((duration.as_nanos() as u64) / ITERATIONS / 1000) as f64 / 1000.0;
+  // println!("Average decode time: {} ms ({} iterations)", avgtime, ITERATIONS);
 }

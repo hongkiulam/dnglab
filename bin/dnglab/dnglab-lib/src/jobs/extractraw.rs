@@ -15,7 +15,7 @@ use std::{
   fs::remove_file,
   io::{BufReader, BufWriter, Cursor, Write},
 };
-use std::{fs::File, path::PathBuf, time::Instant};
+use std::{fs::File, path::PathBuf, /*time::Instant*/};
 
 /// Job for converting RAW to DNG
 #[derive(Debug, Clone)]
@@ -102,15 +102,16 @@ impl Job for ExtractRawJob {
 
   async fn execute(&self) -> Self::Output {
     debug!("Job running: input: {:?}, output: {:?}", self.input, self.output);
-    let now = Instant::now();
+    // let now = Instant::now();
     match self.internal_exec() {
       Ok(mut stat) => {
-        stat.duration = now.elapsed().as_secs_f32();
+        // stat.duration = now.elapsed().as_secs_f32();
         stat
       }
       Err(e) => JobResult {
         job: self.clone(),
-        duration: now.elapsed().as_secs_f32(),
+        duration: 0.0,
+        // duration: now.elapsed().as_secs_f32(),
         error: Some(e),
       },
     }

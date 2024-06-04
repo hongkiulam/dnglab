@@ -14,7 +14,7 @@ use std::{
   fs::{remove_file, File},
   io::BufWriter,
 };
-use std::{path::PathBuf, time::Instant};
+use std::{path::PathBuf, /*time::Instant*/};
 use tokio::task::spawn_blocking;
 
 /// Job for converting RAW to DNG
@@ -101,23 +101,25 @@ impl Job for Raw2DngJob {
 
   async fn execute(&self) -> Self::Output {
     debug!("Job running: input: {:?}, output: {:?}", self.input, self.output);
-    let now = Instant::now();
+    // let now = Instant::now();
     let cp = self.clone();
     let handle = spawn_blocking(move || cp.internal_exec());
     match handle.await {
       Ok(Ok(mut stat)) => {
-        stat.duration = now.elapsed().as_secs_f32();
+        // stat.duration = now.elapsed().as_secs_f32();
         eprintln!("Writing DNG output file: {}", stat.job.output.display());
         stat
       }
       Ok(Err(e)) => JobResult {
         job: self.clone(),
-        duration: now.elapsed().as_secs_f32(),
+        duration:0.0,
+        // duration: now.elapsed().as_secs_f32(),
         error: Some(e),
       },
       Err(e) => JobResult {
         job: self.clone(),
-        duration: now.elapsed().as_secs_f32(),
+        duration: 0.0,
+        // duration: now.elapsed().as_secs_f32(),
         error: Some(AppError::General(format!("Join handle failed: {:?}", e))),
       },
     }

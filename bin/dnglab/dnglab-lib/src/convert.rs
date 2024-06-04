@@ -7,7 +7,7 @@ use rawler::decoders::supported_extensions;
 use std::fs::create_dir_all;
 use std::path::PathBuf;
 
-use std::time::Instant;
+// use std::time::Instant;
 
 use crate::filemap::{FileMap, MapMode};
 use crate::jobs::raw2dng::{JobResult, Raw2DngJob};
@@ -17,7 +17,7 @@ use rawler::dng::convert::ConvertParams;
 
 /// Entry point for Clap sub command `convert`
 pub async fn convert(options: &ArgMatches) -> crate::Result<()> {
-  let now = Instant::now();
+  // let now = Instant::now();
 
   let recursive = options.get_flag("recursive");
 
@@ -79,7 +79,7 @@ pub async fn convert(options: &ArgMatches) -> crate::Result<()> {
       eprintln!("   {}", failed.job.input.display());
     }
   }
-  println!("Total time: {:.2}s", now.elapsed().as_secs_f32());
+  // println!("Total time: {:.2}s", now.elapsed().as_secs_f32());
   Ok(())
 }
 

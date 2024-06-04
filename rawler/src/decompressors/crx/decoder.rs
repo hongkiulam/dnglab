@@ -14,7 +14,7 @@ use bitstream_io::BitReader;
 use itertools::izip;
 use log::debug;
 use rayon::prelude::*;
-use std::{convert::TryInto, io::Cursor, time::Instant};
+use std::{convert::TryInto, io::Cursor, /*time::Instant*/};
 
 /// Maximum value for K during Adaptive Golomb-Rice for K prediction
 pub(super) const PREDICT_K_MAX: u32 = 15;
@@ -164,7 +164,7 @@ impl CodecParams {
   /// Decoding processes all planes in all tiles and assembles the
   /// decoded planes into proper tile output position and CFA pattern.
   pub fn decode(mut self, mdat: &[u8]) -> Result<Vec<u16>> {
-    let instant = Instant::now();
+    // let instant = Instant::now();
     debug!("Tile configuration: rows: {}, columns: {}", self.tile_rows, self.tile_cols);
     // Build nested Tiles/Planes/Bands
     let mut tiles = parse_header(self.get_header(mdat))?;
@@ -210,7 +210,7 @@ impl CodecParams {
         return Err(e);
       }
     }
-    debug!("MDAT decoding and CFA build: {} s", instant.elapsed().as_secs_f32());
+    // debug!("MDAT decoding and CFA build: {} s", instant.elapsed().as_secs_f32());
     Ok(cfa)
   }
 

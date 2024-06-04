@@ -25,7 +25,7 @@ use std::num::ParseFloatError;
 use std::path::{Path, PathBuf};
 
 use std::str::FromStr;
-use std::time::Instant;
+// use std::time::Instant;
 
 fn get_input_path<'a>(inputs: &'a [&PathBuf], maps: &[&InputSourceUsageMap], usage: InputUsage) -> std::io::Result<&'a PathBuf> {
   maps
@@ -51,7 +51,7 @@ pub async fn makedng(options: &ArgMatches) -> crate::Result<()> {
 
 /// Entry point for Clap sub command `makedng`
 pub async fn makedng_internal(options: &ArgMatches, dest_path: &Path) -> crate::Result<()> {
-  let _now = Instant::now();
+  // let _now = Instant::now();
 
   let inputs: Vec<&PathBuf> = options.get_many("inputs").expect("inputs are required").collect();
   let maps: Vec<&InputSourceUsageMap> = options.get_many("map").unwrap_or_default().collect();
